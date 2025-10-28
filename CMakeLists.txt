@@ -32,6 +32,14 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         appmessage.h
         appcore.h appcore.cpp
         datamanager.h datamanager.cpp
+        model.qmodel
+        modelmanager.h modelmanager.cpp
+        cachemanager.h cachemanager.cpp
+        crashreportmanager.h crashreportmanager.cpp
+        fileloader.h fileloader.cpp
+        filesaver.h filesaver.cpp
+        libs.h
+        messageprocessor.h messageprocessor.cpp
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET M3 APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR

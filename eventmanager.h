@@ -4,40 +4,59 @@
 #include "eventqueue.h"
 #include <vector>
 #include <functional>
+#include <unordered_map>
+#include <any>
 
 using namespace std;
 
 // template <typename... Args>
 // using Callback = function<void(Args... args)>;
 
-struct CallbackEntry {
-    int id;
-    std::shared_ptr<CallbackEntry> cb;
-
-    bool operator==(const CallbackEntry& other) const {
-        return id == other.id;
-    }
-};
-
 class EventManager // занимается рассылкой и обработкой сообщений, создаёт очередь сообщений, даёт на неё ссылку
         // сюда же можно свалить задачу по загрузке данных в окна, программа запустилась - постепенно закидываются данные в окна
 {
 public:
-    EventManager();
+    EventManager(): messages{}, processor(messages, subscribers) {
+        messages.setProcessor(&(this->processor));
+    }
 
-    void subscribe(const CallbackEntry callback);
+    void subscribe(const std::string& msg, std::function<void(const std::any&)> fn) {
+        subscribers[msg] = std::move(fn);
+    }
 
-    void unsubscribe(const CallbackEntry callback);
+    template <typename C>
+    void subscribe(const std::string& msg, void (C::*method)(), C* instance) {
+        subscribers[msg] = [=](const std::any&) {
+            (instance->*method)();
+        };
+    }
 
-    EventQueue getQueue();
+    template <typename T, typename C>
+    void subscribe(const std::string& msg, void (C::*method)(T), C* instance) {
+        subscribers[msg] = [=](const std::any& data) {
+            if (data.type() == typeid(T))
+                (instance->*method)(std::any_cast<T>(data));
+        };
+    }
+
+
+    //void unsubscribe(const ); доделать, я хз по какому признаку их удалять
+
+    EventQueue& getQueue();
 
     void sendMessage(AppMessage message);
 
 private:
 
-    std::vector<CallbackEntry> callbacks; // хранит ссылки на вызываемые функции модулей
-    int nextId = 0;
+    // регистрируем модуль в формате <Сообщение, на которое отреагирую><Коллбек>
+    // Сообщения уже отправляются с данными
+    // Нужна трассировка сохранённых сообщений
+
+    std::unordered_map<std::string, std::function<void(const std::any&)>> subscribers = std::unordered_map<std::string, std::function<void(const std::any&)>>();
+
     EventQueue messages = EventQueue{}; // хранит сообщения
+
+    MessageProcessor processor = MessageProcessor(messages, subscribers);
 
     void notifyModules();
 

@@ -1,4 +1,5 @@
 #include "mainwindow.h"
+#include "datamanager.h"
 
 #include <QApplication>
 #include <QLocale>
@@ -24,11 +25,18 @@ int main(int argc, char *argv[])
         QThread::msleep(300);
         a.processEvents();
     }
+/////////////////////////////////////////////////
+    AppCore *core = new AppCore;
 
-    // основное окно
-    MainWindow mainWindow;
+    DataManager *dtm = new DataManager(core);
+
+    core->getEventManager().subscribe("save", &DataManager::dummy, dtm);
+    core->getEventManager().subscribe("new", &DataManager::dummy2, dtm);
+
+    MainWindow mainWindow(nullptr, core);
+
     mainWindow.show();
-
+/////////////////////////////////////////////////
     splash.finish(&mainWindow); // закрыть сплеш после показа окна
     QTranslator translator;
     const QStringList uiLanguages = QLocale::system().uiLanguages();

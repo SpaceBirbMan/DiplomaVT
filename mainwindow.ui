@@ -55,7 +55,7 @@
          <x>0</x>
          <y>0</y>
          <width>205</width>
-         <height>526</height>
+         <height>530</height>
         </rect>
        </property>
       </widget>
@@ -76,7 +76,7 @@
      <x>0</x>
      <y>0</y>
      <width>1071</width>
-     <height>25</height>
+     <height>23</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu">
@@ -84,6 +84,7 @@
      <string>Файл</string>
     </property>
     <addaction name="newFileMenuButton"/>
+    <addaction name="saveFileMenuButton"/>
    </widget>
    <widget class="QMenu" name="menu_2">
     <property name="title">
@@ -103,6 +104,11 @@
   <action name="newFileMenuButton">
    <property name="text">
     <string>Новый файл</string>
+   </property>
+  </action>
+  <action name="saveFileMenuButton">
+   <property name="text">
+    <string>Сохранить как...</string>
    </property>
   </action>
  </widget>

@@ -1,3 +1,5 @@
 #include "datamanager.h"
 
-DataManager::DataManager() {}
+DataManager::DataManager(AppCore* acptr) {
+    this->appCorePtr = acptr;
+}
