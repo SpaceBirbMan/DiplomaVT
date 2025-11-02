@@ -9,6 +9,12 @@ using senderType = std::string;
 class AppMessage
 {
 public:
+    /**
+     * @brief AppMessage сообщение для обработчиков приложения
+     * @param sender модуль отправитль
+     * @param message сообщение (оно будет сверяться с таблицей зарегистрированных коллбеков)
+     * @param data данные для вызываемых методов
+     */
     AppMessage(senderType sender, messageType message, std::any data) {
         this->message = message;
         this->sender = sender;

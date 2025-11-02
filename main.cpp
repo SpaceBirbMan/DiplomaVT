@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "datamanager.h"
+#include "enginemanager.h"
 
 #include <QApplication>
 #include <QLocale>
@@ -29,11 +30,12 @@ int main(int argc, char *argv[])
     AppCore *core = new AppCore;
 
     DataManager *dtm = new DataManager(core);
-
-    core->getEventManager().subscribe("save", &DataManager::dummy, dtm);
-    core->getEventManager().subscribe("new", &DataManager::dummy2, dtm);
-
+    EngineManager *egm = new EngineManager(core);
     MainWindow mainWindow(nullptr, core);
+
+    core->getEventManager().sendMessage(AppMessage("main", "askToReady", 0)); // вместо нуля можно аргументы
+
+
 
     mainWindow.show();
 /////////////////////////////////////////////////

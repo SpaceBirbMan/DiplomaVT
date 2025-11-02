@@ -15,6 +15,7 @@ public:
 
 private:
 
+    std::string name = "Core";
 
     EventQueue *eQueuePointer = nullptr;
 
@@ -22,6 +23,13 @@ private:
 
     void dummyFunction() {
         std::cout<< eQueuePointer->logQueue() << std::endl;
+    }
+
+    void startInitialization();
+    void discardStartUp();
+
+    void askToReady() {
+        eventManager.sendMessage(AppMessage(name, "ask_cache", 0));
     }
 
 };

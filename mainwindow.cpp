@@ -8,13 +8,19 @@ MainWindow::MainWindow(QWidget *parent, AppCore *core) // есть подозр�
     this->core = core;
     ui->setupUi(this);
 
+    core->getEventManager().subscribe("cache_err", MainWindow::showCacheErrorMessage, this);
+
     connect(ui->newFileMenuButton, &QAction::triggered, this, MainWindow::onNewFileClicked);
-     connect(ui->saveFileMenuButton, &QAction::triggered, this, MainWindow::onSaveFileClicked);
+    connect(ui->saveFileMenuButton, &QAction::triggered, this, MainWindow::onSaveFileClicked);
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::showCacheErrorMessage() {
+    std::cout << "Cache doesn't exists, idi peredelivay" << std::endl;
 }
 
 void MainWindow::onNewFileClicked() {

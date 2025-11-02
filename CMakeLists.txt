@@ -40,6 +40,12 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         filesaver.h filesaver.cpp
         libs.h
         messageprocessor.h messageprocessor.cpp
+        fileinstance.h fileinstance.cpp
+        filetypes.h
+        enginemanager.h enginemanager.cpp
+        engineregistry.h engineregistry.cpp
+        shorts.h
+
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET M3 APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR

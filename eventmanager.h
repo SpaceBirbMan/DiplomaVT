@@ -31,6 +31,11 @@ public:
         };
     }
 
+    /**
+     * @brief subscribe Подписывает модуль на сообщения
+     * @param msg Сообщение, на которое отреагирует метод модуля
+     * @param instance Метод и модуль, из которого вызывается метод (&класс::метод, *модуль)
+     */
     template <typename T, typename C>
     void subscribe(const std::string& msg, void (C::*method)(T), C* instance) {
         subscribers[msg] = [=](const std::any& data) {

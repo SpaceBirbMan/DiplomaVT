@@ -21,7 +21,7 @@ void MessageProcessor::process() {
                 const std::string& key = subscriber_pair.first;
                 const auto& callback = subscriber_pair.second;
                 if (msg.getMessage() == key) {
-                    callback(msg.getData());
+                    callback(msg.getData()); // пока поддерживает один параметр todo: Сделать несколько
                 }
             }
             std::cout << "Обработано" << std::endl;

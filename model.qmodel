@@ -49,7 +49,7 @@
                          </base-DElement>
                          <object>{bd9122cf-328c-458f-9583-abf0cded6b47}</object>
                          <name>Cache Manager</name>
-                         <pos>x:315;y:315</pos>
+                         <pos>x:295;y:290</pos>
                          <rect>x:-50;y:-30;w:100;h:60</rect>
                          <visual-role>0</visual-role>
                         </DObject>
@@ -69,8 +69,8 @@
                          </base-DElement>
                          <object>{1e21b9ac-299a-4d4b-8ced-cb820a4f4d94}</object>
                          <name>Model Manager</name>
-                         <pos>x:320;y:195</pos>
-                         <rect>x:-45;y:-30;w:90;h:60</rect>
+                         <pos>x:290;y:195</pos>
+                         <rect>x:-50;y:-30;w:100;h:60</rect>
                          <visual-role>0</visual-role>
                         </DObject>
                        </base-DObject>
@@ -89,8 +89,8 @@
                          </base-DElement>
                          <object>{f6bdf701-085e-4436-b10d-4f76579a1fd0}</object>
                          <name>Main Controller</name>
-                         <pos>x:550;y:280</pos>
-                         <rect>x:-45;y:-30;w:90;h:60</rect>
+                         <pos>x:450;y:265</pos>
+                         <rect>x:-50;y:-30;w:100;h:60</rect>
                          <visual-role>0</visual-role>
                         </DObject>
                        </base-DObject>
@@ -109,8 +109,8 @@
                          </base-DElement>
                          <object>{fed8c640-ea7c-4374-b35e-e81b974a28f9}</object>
                          <name>Random Access Manager</name>
-                         <pos>x:280;y:95</pos>
-                         <rect>x:-70;y:-30;w:140;h:60</rect>
+                         <pos>x:345;y:105</pos>
+                         <rect>x:-75;y:-30;w:150;h:60</rect>
                          <visual-role>0</visual-role>
                         </DObject>
                        </base-DObject>
@@ -129,8 +129,8 @@
                          </base-DElement>
                          <object>{00eefdf6-9783-4955-b9d6-171e9a6b35b5}</object>
                          <name>Crash Report Manager</name>
-                         <pos>x:295;y:425</pos>
-                         <rect>x:-65;y:-30;w:130;h:60</rect>
+                         <pos>x:310;y:410</pos>
+                         <rect>x:-70;y:-30;w:140;h:60</rect>
                          <visual-role>0</visual-role>
                         </DObject>
                        </base-DObject>
@@ -149,7 +149,7 @@
                          </base-DElement>
                          <object>{95a68aad-40b3-4f39-bf50-46a09205fa84}</object>
                          <name>Loader</name>
-                         <pos>x:70;y:145</pos>
+                         <pos>x:60;y:140</pos>
                          <rect>x:-40;y:-30;w:80;h:60</rect>
                          <visual-role>0</visual-role>
                         </DObject>
@@ -169,7 +169,7 @@
                          </base-DElement>
                          <object>{395beec5-9aa1-46d8-8281-a923bf9b8a0a}</object>
                          <name>Saver</name>
-                         <pos>x:65;y:430</pos>
+                         <pos>x:65;y:380</pos>
                          <rect>x:-40;y:-30;w:80;h:60</rect>
                          <visual-role>0</visual-role>
                         </DObject>
@@ -439,8 +439,8 @@
                          </base-DElement>
                          <object>{392f6b20-9985-4a07-b481-0e8563bac565}</object>
                          <name>Error Handler</name>
-                         <pos>x:430;y:740</pos>
-                         <rect>x:-40;y:-30;w:80;h:60</rect>
+                         <pos>x:455;y:745</pos>
+                         <rect>x:-45;y:-30;w:90;h:60</rect>
                          <visual-role>0</visual-role>
                         </DObject>
                        </base-DObject>
@@ -459,8 +459,8 @@
                          </base-DElement>
                          <object>{a30c63b5-1ef2-4970-8352-fa21d4f41ae4}</object>
                          <name>Event Manager</name>
-                         <pos>x:495;y:900</pos>
-                         <rect>x:-45;y:-30;w:90;h:60</rect>
+                         <pos>x:485;y:880</pos>
+                         <rect>x:-50;y:-30;w:100;h:60</rect>
                          <visual-role>0</visual-role>
                         </DObject>
                        </base-DObject>
@@ -479,7 +479,7 @@
                          </base-DElement>
                          <object>{c94d5b12-fa4a-4f7a-810a-bfec86f51d3c}</object>
                          <name>Logger</name>
-                         <pos>x:415;y:1035</pos>
+                         <pos>x:445;y:1010</pos>
                          <rect>x:-40;y:-30;w:80;h:60</rect>
                          <visual-role>0</visual-role>
                         </DObject>
@@ -500,7 +500,7 @@
                          <object>{9de836d2-e7c7-486e-a882-480f795706ef}</object>
                          <name>Resource Manager</name>
                          <pos>x:775;y:830</pos>
-                         <rect>x:-55;y:-30;w:110;h:60</rect>
+                         <rect>x:-60;y:-30;w:120;h:60</rect>
                          <visual-role>0</visual-role>
                         </DObject>
                        </base-DObject>
@@ -520,7 +520,7 @@
                          <object>{9f4d172a-82b7-4c38-adab-62cacb331327}</object>
                          <name>Permissions Manager</name>
                          <pos>x:615;y:1010</pos>
-                         <rect>x:-60;y:-30;w:120;h:60</rect>
+                         <rect>x:-65;y:-30;w:130;h:60</rect>
                          <visual-role>0</visual-role>
                         </DObject>
                        </base-DObject>
@@ -709,8 +709,8 @@
                          </base-DElement>
                          <object>{d502dbec-5149-42a9-9fa3-0ec24e0b1b2d}</object>
                          <name>Engines Registry</name>
-                         <pos>x:835;y:110</pos>
-                         <rect>x:-50;y:-30;w:100;h:60</rect>
+                         <pos>x:770;y:180</pos>
+                         <rect>x:-55;y:-30;w:110;h:60</rect>
                          <visual-role>6</visual-role>
                         </DObject>
                        </base-DObject>
@@ -729,8 +729,8 @@
                          </base-DElement>
                          <object>{90fa9c8d-9bf8-49ed-9ace-ff56fc5b383c}</object>
                          <name>Engine Resource Manager</name>
-                         <pos>x:990;y:245</pos>
-                         <rect>x:-75;y:-30;w:150;h:60</rect>
+                         <pos>x:980;y:305</pos>
+                         <rect>x:-80;y:-30;w:160;h:60</rect>
                          <visual-role>0</visual-role>
                         </DObject>
                        </base-DObject>
@@ -749,8 +749,8 @@
                          </base-DElement>
                          <object>{49ae418d-2f30-4894-b568-6d69cb5725df}</object>
                          <name>Main Controller</name>
-                         <pos>x:780;y:340</pos>
-                         <rect>x:-45;y:-30;w:90;h:60</rect>
+                         <pos>x:765;y:315</pos>
+                         <rect>x:-50;y:-30;w:100;h:60</rect>
                          <visual-role>0</visual-role>
                         </DObject>
                        </base-DObject>
@@ -841,7 +841,7 @@
                         </DElement>
                        </base-DElement>
                        <text>Data Manager</text>
-                       <pos>x:310;y:255</pos>
+                       <pos>x:300;y:250</pos>
                        <rect>x:-300;y:-220;w:600;h:440</rect>
                       </DBoundary>
                      </instance>
@@ -855,7 +855,7 @@
                         </DElement>
                        </base-DElement>
                        <text>Render Engines Manager</text>
-                       <pos>x:900;y:225</pos>
+                       <pos>x:885;y:225</pos>
                        <rect>x:-190;y:-180;w:380;h:360</rect>
                       </DBoundary>
                      </instance>
@@ -921,7 +921,7 @@
                     </item>
                    </qlist>
                   </elements>
-                  <last-modified>1761014640222</last-modified>
+                  <last-modified>1762077409806</last-modified>
                   <toolbarid>General</toolbarid>
                  </MDiagram>
                 </base-MDiagram>

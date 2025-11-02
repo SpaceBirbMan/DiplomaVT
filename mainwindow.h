@@ -23,6 +23,8 @@ private:
     Ui::MainWindow *ui;
     AppCore* core;
 
+    void showCacheErrorMessage();
+
 private slots:
     void onNewFileClicked();
     void onSaveFileClicked();
