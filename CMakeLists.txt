@@ -45,6 +45,12 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         enginemanager.h enginemanager.cpp
         engineregistry.h engineregistry.cpp
         shorts.h
+        DevGuide.md
+
+        dynamiclibrary.h dynamiclibrary.cpp
+        devicemanager.h devicemanager.cpp
+        deviceregistrator.h deviceregistrator.cpp
+        inputdevice.h inputdevice.cpp
 
     )
 # Define target properties for Android with Qt 6 as:

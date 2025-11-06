@@ -9,23 +9,17 @@ DataManager::DataManager(AppCore* acptr) {
 
     acptr->getEventManager().subscribe("ask_cache", &DataManager::tryToLoadCache, this);
 
+    acptr->getEventManager().subscribe("engine_resolving_request", &DataManager::resolveFuncTable, this);
+
     acptr->getEventManager().subscribe("save", &DataManager::dummy, this);
     acptr->getEventManager().subscribe("new", &DataManager::dummy2, this);
-    acptr->getEventManager().subscribe("plugin_main_request", &DataManager::pluginMainRequest, this);
 }
 
 void DataManager::initialize() {
 
     std::unordered_map<std::string, std::any> map = this->cacheManagerPtr->loadCache();
-
-
-
+    // раздача данных - сообщение set_data (broadcast)
     appCorePtr->getEventManager().sendMessage(AppMessage("dataManager", "dm_ready", 0));
-}
-
-void DataManager::pluginMainRequest(std::string path) {
-    auto mainptr = 0;
-    appCorePtr->getEventManager().sendMessage(AppMessage("dataManager", "plugin_main_respond", mainptr));
 }
 
 void DataManager::tryToLoadCache() {
@@ -35,4 +29,12 @@ void DataManager::tryToLoadCache() {
         return;
     }
     appCorePtr->getEventManager().sendMessage(AppMessage(name, "cache_ok", 0));
+}
+
+void DataManager::resolveFuncTable(std::string path) {
+    funcMap map {};
+    DynamicLibrary lib = DynamicLibrary(path);
+    // логика запихивания методов в карту
+
+    appCorePtr->getEventManager().sendMessage(AppMessage(name, "engine_resolving_respond", map));
 }

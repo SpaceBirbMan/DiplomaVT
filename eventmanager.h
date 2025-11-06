@@ -47,7 +47,7 @@ public:
 
     //void unsubscribe(const ); доделать, я хз по какому признаку их удалять
 
-    EventQueue& getQueue();
+    EventQueue& getQueue(); // todo: Возможно требуется запретить запрос самой очереди
 
     void sendMessage(AppMessage message);
 

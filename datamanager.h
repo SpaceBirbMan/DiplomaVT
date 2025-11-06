@@ -6,6 +6,7 @@
 #include "modelmanager.h"
 #include "cachemanager.h"
 #include "crashreportmanager.h"
+#include "dynamiclibrary.h"
 #include <any>
 
 class DataManager
@@ -17,8 +18,6 @@ public:
 
     void dummy(int a) { std::cout << "a1" << std::endl;}
     void dummy2() { std::cout << "a2" << std::endl;}
-
-    void pluginMainRequest(std::string path);
 
 private:
 
@@ -32,6 +31,8 @@ private:
     CrashReportManager* crashReportManagerPtr;
 
     void tryToLoadCache();
+
+    void resolveFuncTable(std::string path);
 
 };
 
