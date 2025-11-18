@@ -8,6 +8,8 @@
 #include "crashreportmanager.h"
 #include "dynamiclibrary.h"
 #include <any>
+#include <vector>
+#include "misc.h"
 
 class DataManager
 {
@@ -26,13 +28,17 @@ private:
     AppCore* appCorePtr = nullptr; // ядро
 
     /// Внутренние модули модуля
-    ModelManager* modelManagerPtr;
-    CacheManager* cacheManagerPtr;
-    CrashReportManager* crashReportManagerPtr;
+    ModelManager modelManager = ModelManager(); // были указатели, вспомнить зачем
+    CacheManager cacheManager;
+    CrashReportManager crashReportManager;
 
     void tryToLoadCache();
 
+    void loadModel(std::vector<std::string> exts);
+
     void resolveFuncTable(std::string path);
+
+    void saveFiles(std::any data);
 
 };
 

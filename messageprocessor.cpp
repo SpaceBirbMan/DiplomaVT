@@ -16,16 +16,18 @@ void MessageProcessor::process() {
         // обрабатываем все сообщения, пока они есть
         while (!qPtr.is_empty()) {
             auto msg = qPtr.pollMessage();
-            lock.unlock(); // выяснить, нахрена тут мьютекс отпускать
+            std::cout << ">>" + msg.getSender() + " " + msg.getMessage() << std::endl;
+            lock.unlock(); // выяснить, зачем тут мьютекс отпускать
             for (const auto& subscriber_pair : subsTable) {
                 const std::string& key = subscriber_pair.first;
                 const auto& callback = subscriber_pair.second;
                 if (msg.getMessage() == key) {
+
                     callback(msg.getData()); // пока поддерживает один параметр todo: Сделать несколько
                 }
             }
-            std::cout << "Обработано" << std::endl;
-            lock.lock();
+
+            lock.lock(); // todo: Заменить на бинарный поиск, после инициализации выполнять сортировку по алфавиту
         }
     }
 }

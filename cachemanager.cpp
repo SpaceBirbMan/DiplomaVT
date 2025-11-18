@@ -1,21 +1,29 @@
 #include "cachemanager.h"
 #include "shorts.h"
-#include "fileinstance.h"
+
 
 CacheManager::CacheManager(): fileLoader(FileLoader()), fileSaver(FileSaver()) {}
 
-std::unordered_map<std::string, std::any> CacheManager::loadCache() {
-    FileInstance instance = this->fileLoader.loadFile("cache.cah");
-    if (instance.getFlags().empty()) {
-        return cacheMap();
-    }
-    // ...
-    std::unordered_map<std::string, std::any> map = std::any_cast<std::unordered_map<std::string, std::any>>(instance.getData());;
-    // ...
+void CacheManager::loadCache() {
 
-    return map;
+    try {
+        this->cache = fileLoader.loadJson(CACHE_FILE_PATH);
+    } catch (...) {}
+
 }
 
-void CacheManager::saveCache(std::unordered_map<std::string, std::any> data) {
+void CacheManager::saveCache() {
+
+    try {
+        fileSaver.saveJson(CACHE_FILE_PATH, this->cache);
+    } catch (...) {}
+
+}
+
+void CacheManager::writeCache(nlohmann::json payload) {
+
+    try {
+        this->cache.push_back(payload);
+    } catch (...) {}
 
 }

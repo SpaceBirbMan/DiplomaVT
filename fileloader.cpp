@@ -1,22 +1,36 @@
 #include "fileloader.h"
-#include "fstream"
-#include "fileinstance.h"
+#include <fstream>
 #include <iostream>
 
 FileLoader::FileLoader() {}
 
-FileInstance FileLoader::loadFile(std::string path) {
+payload FileLoader::loadBin(std::string path) {
 
-    std::ifstream file(path, std::ios::binary);
+    try {
+        std::ifstream file(path, std::ios::binary);
+        file.seekg(0, std::ios::end);
+        size_t size = file.tellg();
+        file.seekg(0, std::ios::beg);
+        payload data(size);
+        file.read(reinterpret_cast<char*>(data.data()), size);
+        return data;
+    } catch (...) {}
 
-    if (!file) {
-        std::cout << "File does not exists" << std::endl;
-        return FileInstance();
-    }
+}
 
-    FileInstance instance;
+nlohmann::json FileLoader::loadJson(std::string path) {
 
-    file.read(reinterpret_cast<char*>(&instance), sizeof(instance));
+    nlohmann::json j;
 
-    return instance;
+    try {
+        std::ifstream file(path);
+        if (file.is_open()) {
+            file >> j;
+            file.close();
+        } else {
+            std::cerr << "Error opening file for reading!" << std::endl;
+        }
+
+        return j;
+    } catch (...) {}
 }

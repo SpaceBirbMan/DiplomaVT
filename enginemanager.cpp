@@ -15,27 +15,32 @@ EngineManager::EngineManager(AppCore* acptr) {
     acptr->getEventManager().subscribe("initialize", &EngineManager::initialize, this);
     // ответ на возврат ссылок плагина
     acptr->getEventManager().subscribe("engine_resolving_respond", &EngineManager::setActiveEngine, this);
-    // ответ на получение кеша
-    acptr->getEventManager().subscribe("set_data", &EngineManager::initializeCache, this);
     acptr->getEventManager().subscribe("general_init_ok", &EngineManager::setActiveEngine, this);
-}
 
+    acptr->getEventManager().subscribe("set_data", &EngineManager::deserializeCache, this);
+}
 
 void EngineManager::setFuncs(funcMap map) {
     // todd: верефикация таблицы (maybe)
     this->currentEngineFunctions = map;
 }
 
-void EngineManager::initializeCache(cacheMap map) {
-    // сначала надо взять словарь от своего модуля, потом
-    // в нём перебирать переменные vvvv
-    for (auto pair : map) {
-        // скорее всего придётся руками городить рефлексию и юзать макросы
-    }
-}
-
 void EngineManager::initialize() {
     acptr->getEventManager().sendMessage(AppMessage(name, "init_started", 0));
+    auto deserialize_lambda = [this](const std::any& data) { this->deserializeCache(data); };
+    // Changed: lambda now takes a const std::any& argument
+    auto serialize_lambda = [this](const std::any& /* unused_data */) -> json { return this->serializeCache(); };
+
+    // Explicitly constructing std::function objects might help if needed, though direct initialization usually works:
+    std::function<void(const std::any&)> deserialize_wrapper = deserialize_lambda;
+    // Changed: type now matches the expected signature with const std::any&
+    std::function<json(const std::any&)> serialize_wrapper = serialize_lambda;
+
+    cacheForm cf_instance;
+    cf_instance.name = name;
+    cf_instance.desfn = deserialize_wrapper;
+    cf_instance.sefn = serialize_wrapper;
+    acptr->getEventManager().sendMessage(AppMessage(name, "sub_to_cache", cf_instance));
 }
 
 void EngineManager::setActiveEngine(std::string ename) {

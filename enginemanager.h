@@ -5,13 +5,18 @@
 #include "appcore.h"
 #include "unordered_map"
 #include "shorts.h"
+#include "icacheable.h"
+#include <nlohmann/json.hpp>
+#include "misc.h"
 
-class EngineManager
+using json = nlohmann::json;
+
+class EngineManager : public ICacheable
 {
 public:
     EngineManager(AppCore* acptr);
 
-
+    std::string cacheKey() const override { return name; }
 
 private:
 
@@ -19,13 +24,27 @@ private:
 
     AppCore* acptr;
 
-    std::unordered_map<std::string, std::string> enginesRegistry {}; // название | путь
-
     funcMap currentEngineFunctions; // указывает на функцию входа в код движка (main в движке)
 
-    void initialize();
+    ////////////////////////////////Сериализуемые поля///////////////////////////////////
 
-    void initializeCache(cacheMap map);
+    std::unordered_map<std::string, std::string> enginesRegistry {}; // название | путь
+
+    /////////////////////////////////////////////////////////////////////////////////////
+
+    nlohmann::json serializeCache() const override {
+        nlohmann::json j = {
+            {"enginesRegistry", enginesRegistry}
+        };
+        return j;
+    }
+
+    void deserializeCache(const std::any& data) override {
+        auto j = std::any_cast<nlohmann::json>(data);
+        enginesRegistry = j["enginesRegistry"];
+    }
+
+    void initialize();
 
     void funcsTableResolvingRequest();
 

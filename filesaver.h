@@ -3,19 +3,22 @@
 
 #include <string>
 #include <any>
+#include "misc.h"
+#include <nlohmann/json.hpp>
 
 class FileSaver
 {
 public:
     FileSaver();
 
-    void saveTxtFile(std::string name, std::string data);
+    void saveBin(std::string path, const payload &data);
 
-    void saveBinFile(std::string name, std::any data);
+    void saveJson(std::string path, const nlohmann::json &data);
 
-    //void saveIniFIle(std::string name, std::)
+    //void saveIniFile(std::string name, std::)
 
     // json
 };
 
 #endif // FILESAVER_H
+

@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 #include "appcore.h"
+#include <QTableWidget>
+#include "uirenderer.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -24,9 +26,12 @@ private:
     AppCore* core;
 
     void showCacheErrorMessage();
+    void setControlsTable(std::unordered_map<std::string, std::string> table);
+    void initDynamicUi();
 
 private slots:
     void onNewFileClicked();
     void onSaveFileClicked();
+
 };
 #endif // MAINWINDOW_H

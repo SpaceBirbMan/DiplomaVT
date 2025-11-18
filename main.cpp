@@ -1,12 +1,20 @@
 #include "mainwindow.h"
 #include "datamanager.h"
 #include "enginemanager.h"
+#include "testEng/core.h"
 
 #include <QApplication>
 #include <QLocale>
 #include <QTranslator>
 #include <QSplashScreen>
 #include <QThread>
+
+// Вспомогательная функция для отправки сообщения о сохранении кэша
+void sendSaveCacheMessage(AppCore* core) {
+    if (core) {
+        core->getEventManager().sendMessage(AppMessage("main", "save_cache", 0));
+    }
+}
 
 int main(int argc, char *argv[])
 {
@@ -32,10 +40,9 @@ int main(int argc, char *argv[])
     DataManager *dtm = new DataManager(core);
     EngineManager *egm = new EngineManager(core);
     MainWindow mainWindow(nullptr, core);
+    Core *engCore = new Core(core);
 
     core->getEventManager().sendMessage(AppMessage("main", "askToReady", 0)); // вместо нуля можно аргументы
-
-
 
     mainWindow.show();
 /////////////////////////////////////////////////
@@ -49,6 +56,11 @@ int main(int argc, char *argv[])
             break;
         }
     }
+
+    // Подключаем слот для отправки сообщения перед закрытием приложения
+    QObject::connect(&a, &QApplication::aboutToQuit, [&core](){
+        sendSaveCacheMessage(core);
+    });
 
     return a.exec();
 }

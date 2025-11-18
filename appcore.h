@@ -13,6 +13,8 @@ public:
         return eventManager;
     }
 
+    // вынести subscribe, send и прочее
+
 private:
 
     std::string name = "Core";

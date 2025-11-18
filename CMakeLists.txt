@@ -43,7 +43,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         fileinstance.h fileinstance.cpp
         filetypes.h
         enginemanager.h enginemanager.cpp
-        engineregistry.h engineregistry.cpp
+
         shorts.h
         DevGuide.md
 
@@ -51,6 +51,18 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         devicemanager.h devicemanager.cpp
         deviceregistrator.h deviceregistrator.cpp
         inputdevice.h inputdevice.cpp
+        testEng/core.h testEng/core.cpp
+        testEng/puppetmodel.h testEng/puppetmodel.cpp
+        testEng/inputhandler.h testEng/inputhandler.cpp
+        testEng/rendercontroller.h testEng/rendercontroller.cpp
+        testEng/modelfactory.h testEng/modelfactory.cpp
+        misc.h
+        icacheable.h
+        consts.h
+
+        abstractuinodes.h
+        uirenderer.h uirenderer.cpp
+
 
     )
 # Define target properties for Android with Qt 6 as:

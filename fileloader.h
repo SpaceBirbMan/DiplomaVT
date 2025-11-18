@@ -1,15 +1,17 @@
 #ifndef FILELOADER_H
 #define FILELOADER_H
 
-#include "fileinstance.h"
+#include "misc.h"
 #include <string>
+#include <nlohmann/json.hpp>
 
 class FileLoader
 {
 public:
     FileLoader();
 
-    FileInstance loadFile(std::string path);
+    payload loadBin(std::string path);
+    nlohmann::json loadJson(std::string path);
 };
 
 #endif // FILELOADER_H
