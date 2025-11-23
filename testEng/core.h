@@ -4,6 +4,7 @@
 #include "../appcore.h"
 #include <string>
 #include "puppetmodel.h"
+#include "../abstractuinodes.h"
 
 class Core
 {
@@ -16,14 +17,19 @@ private:
 
     std::string name = "engcore";
 
-    PuppetModel *puppet = new PuppetModel();
+    PuppetModel *puppet = new PuppetModel(); // todo: ВНИМАНИЕ, указатели лучше не писать по простому
+    //std::unique_ptr<PuppetModel> puppet = std::make_unique<PuppetModel>();
 
     void buildModel(std::any data);
 
     void modelDataRequest();
 
+    void buildGui();
+
+    std::shared_ptr<UiPage> rootPage;
+
 };
 
 #endif // CORE_H
 
-// здесь можно сделать всю логику вообще
+// здесь можно сделать всю логику вообще, на время

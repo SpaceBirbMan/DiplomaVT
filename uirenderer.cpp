@@ -1,4 +1,5 @@
 #include "uirenderer.h"
+#include <iostream>
 
 ///////////////////////////////////////////////////////////////
 //  helpers
@@ -15,6 +16,8 @@ static QBoxLayout* makeLayout(GroupSortType sort) {
 ///////////////////////////////////////////////////////////////
 
 QWidget* UiRenderer::renderElement(UiElement* elem) {
+
+    std::cout << "renderElement: " << typeid(*elem).name() << std::endl;
 
     if (auto g = dynamic_cast<UiGroup*>(elem))
         return renderGroup(g);
@@ -186,6 +189,8 @@ QWidget* UiRenderer::renderGroup(UiGroup* group) {
 QWidget* UiRenderer::renderPage(UiPage* page) {
     // страница сама по себе = контейнер +
     // заголовок будет handled в TabWidget
+
+    std::cout << "renderPage CALLED" << std::endl;
     return renderContainer(page);
 }
 
@@ -193,14 +198,19 @@ QWidget* UiRenderer::renderPage(UiPage* page) {
 //  Root renderer into QTabWidget
 ///////////////////////////////////////////////////////////////
 
-void UiRenderer::renderToTabWidget(UiContainer* root, QTabWidget* tabTarget) {
-    tabTarget->clear();
+void UiRenderer::renderToTabWidget(std::shared_ptr<UiPage> root, QTabWidget* tabTarget) {
+    //tabTarget->clear();
 
-    for (auto& ch : root->children) {
-        if (auto page = dynamic_cast<UiPage*>(ch.get())) {
-            QWidget* content = renderPage(page);
-            tabTarget->insertTab(page->index, content,
-                                 QString::fromStdString(page->title));
-        }
-    }
+    // for (auto& ch : root->children) { todo: смысл этого - передавать страницы в контейнере, чтобы не делать это много раз по отдельности
+    //     if (auto page = dynamic_cast<UiPage*>(ch.get())) {
+    //         QWidget* content = renderPage(page);
+    //         tabTarget->insertTab(page->index, content,
+    //                              QString::fromStdString(page->title));
+    //     }
+    // }
+
+    // ВКЛАДКИ МОЖНО ЗАПУСТИТЬ ОТДЕЛЬНЫМ ОКНОМ!!! ЛОЛ
+
+     QWidget* content = renderPage(root.get());
+     tabTarget->insertTab(root->index, content, QString::fromStdString(root->title));
 }

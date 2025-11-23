@@ -25,7 +25,7 @@ public:
     static QWidget* renderGroup(UiGroup* group);
     static QWidget* renderPage(UiPage* page);
 
-    static void renderToTabWidget(UiContainer* root, QTabWidget* tabTarget);
+    static void renderToTabWidget(std::shared_ptr<UiPage> root, QTabWidget* tabTarget);
 };
 
 #endif // UIRENDERER_H

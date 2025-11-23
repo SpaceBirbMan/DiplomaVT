@@ -8,14 +8,15 @@
 #include <unordered_map>
 #include <any>
 #include <functional>
+#include "misc.h"
 
 class EventQueue; // решение циклической зависимости
 
 class MessageProcessor
 {
 public:
-    explicit MessageProcessor(EventQueue& q, std::unordered_map<std::string, std::function<void(const std::any&)>>& s)
-        :qPtr(q), stopFlag(false), subsTable(s)
+    explicit MessageProcessor(EventQueue& q, /*std::unordered_map<std::string, std::function<void(const std::any&)>>& s,*/ std::vector<subStruct>& v)
+        :qPtr(q), stopFlag(false), /*subsTable(s),*/ subsVector(v)
     {
         proc_thread = std::thread(&MessageProcessor::process, this);
     }
@@ -41,7 +42,8 @@ private:
     std::condition_variable cv;
     std::atomic<bool> stopFlag;
     EventQueue& qPtr;
-    std::unordered_map<std::string, std::function<void(const std::any&)>>& subsTable;
+    //std::unordered_map<std::string, std::function<void(const std::any&)>>& subsTable;
+    std::vector<subStruct>& subsVector;
 
     void process();
 

@@ -21,8 +21,8 @@ int main(int argc, char *argv[])
 
     QApplication a(argc, argv);
 
-    // создаём сплеш
-    QPixmap pixmap(":/splash.png"); // или любой QPixmap
+
+    QPixmap pixmap(":/splash.png");
     QSplashScreen splash(pixmap);
     splash.show();
     a.processEvents(); // показать немедленно
@@ -40,7 +40,7 @@ int main(int argc, char *argv[])
     DataManager *dtm = new DataManager(core);
     EngineManager *egm = new EngineManager(core);
     MainWindow mainWindow(nullptr, core);
-    Core *engCore = new Core(core);
+    Core *engCore = new Core(core); // движок
 
     core->getEventManager().sendMessage(AppMessage("main", "askToReady", 0)); // вместо нуля можно аргументы
 
@@ -57,7 +57,6 @@ int main(int argc, char *argv[])
         }
     }
 
-    // Подключаем слот для отправки сообщения перед закрытием приложения
     QObject::connect(&a, &QApplication::aboutToQuit, [&core](){
         sendSaveCacheMessage(core);
     });

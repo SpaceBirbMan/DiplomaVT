@@ -48,6 +48,8 @@ enum TextType {
 // Base UI nodes
 //////////////////////////////////////////////////////////
 
+// todo: inputbox для файлов, пружинки для более точного позиционирования (v, h) [el1] |////13px////| [el2]
+
 class UiElement {
 public:
     std::string name;

@@ -16,6 +16,14 @@ struct cacheForm {
     std::function<nlohmann::json(const std::any&)> sefn; // сюда помещается функция сериализации кеша
 };
 
+struct subStruct {
+    std::string name;
+    std::function<void(const std::any&)> callback; // todo: Мб ссылка нужна
+
+    subStruct(std::string m, std::function<void(const std::any&)> cb)
+        : name(std::move(m)), callback(std::move(cb)) {}
+};
+
 enum UIElements {
     CONTROL_TABLE,
     COMPONENT_TREE,

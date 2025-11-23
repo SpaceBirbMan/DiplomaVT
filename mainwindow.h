@@ -27,7 +27,7 @@ private:
 
     void showCacheErrorMessage();
     void setControlsTable(std::unordered_map<std::string, std::string> table);
-    void initDynamicUi();
+    void initDynamicUi(std::shared_ptr<UiPage> root);
 
 private slots:
     void onNewFileClicked();

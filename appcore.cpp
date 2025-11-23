@@ -19,4 +19,5 @@ void AppCore::startInitialization() {
 
 void AppCore::discardStartUp() {
 
+
 }

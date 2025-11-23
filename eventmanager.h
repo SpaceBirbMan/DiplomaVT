@@ -6,6 +6,7 @@
 #include <functional>
 #include <unordered_map>
 #include <any>
+#include "misc.h"
 
 using namespace std;
 
@@ -20,15 +21,27 @@ public:
         messages.setProcessor(&(this->processor));
     }
 
+    // void subscribe(const std::string& msg, std::function<void(const std::any&)> fn) {
+    //     subscribers[msg] = std::move(fn);
+    // }
+
     void subscribe(const std::string& msg, std::function<void(const std::any&)> fn) {
-        subscribers[msg] = std::move(fn);
+        subscribers.emplace_back(subStruct(msg, fn));
     }
+
+    // template <typename C>
+    // void subscribe(const std::string& msg, void (C::*method)(), C* instance) {
+    //     subscribers[msg] = [=](const std::any&) {
+    //         (instance->*method)();
+    //     };
+    // }
 
     template <typename C>
     void subscribe(const std::string& msg, void (C::*method)(), C* instance) {
-        subscribers[msg] = [=](const std::any&) {
+        auto callback = [instance, method](const std::any&) {
             (instance->*method)();
         };
+        subscribers.emplace_back(msg, std::move(callback));
     }
 
     /**
@@ -36,12 +49,22 @@ public:
      * @param msg Сообщение, на которое отреагирует метод модуля
      * @param instance Метод и модуль, из которого вызывается метод (&класс::метод, *модуль)
      */
+    // template <typename T, typename C>
+    // void subscribe(const std::string& msg, void (C::*method)(T), C* instance) {
+    //     subscribers[msg] = [=](const std::any& data) {
+    //         if (data.type() == typeid(T))
+    //             (instance->*method)(std::any_cast<T>(data));
+    //     };
+    // }
+
     template <typename T, typename C>
     void subscribe(const std::string& msg, void (C::*method)(T), C* instance) {
-        subscribers[msg] = [=](const std::any& data) {
-            if (data.type() == typeid(T))
+        auto callback = [instance, method](const std::any& data) {
+            if (data.type() == typeid(T)) {
                 (instance->*method)(std::any_cast<T>(data));
+            }
         };
+        subscribers.emplace_back(msg, std::move(callback));
     }
 
 
@@ -57,7 +80,9 @@ private:
     // Сообщения уже отправляются с данными
     // Нужна трассировка сохранённых сообщений
 
-    std::unordered_map<std::string, std::function<void(const std::any&)>> subscribers = std::unordered_map<std::string, std::function<void(const std::any&)>>();
+    //std::unordered_map<std::string, std::function<void(const std::any&)>> subscribers = std::unordered_map<std::string, std::function<void(const std::any&)>>();
+
+    std::vector<subStruct> subscribers {};
 
     EventQueue messages = EventQueue{}; // хранит сообщения
 

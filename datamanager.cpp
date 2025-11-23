@@ -36,7 +36,7 @@ void DataManager::tryToLoadCache() {
     //     appCorePtr->getEventManager().sendMessage(AppMessage(name, "cache_err", 0));
     //     return;
     // }
-    // appCorePtr->getEventManager().sendMessage(AppMessage(name, "cache_ok", 0));
+     appCorePtr->getEventManager().sendMessage(AppMessage(name, "cache_ok", 0));
 }
 
 void DataManager::resolveFuncTable(std::string path) {

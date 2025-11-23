@@ -18,12 +18,19 @@ void MessageProcessor::process() {
             auto msg = qPtr.pollMessage();
             std::cout << ">>" + msg.getSender() + " " + msg.getMessage() << std::endl;
             lock.unlock(); // выяснить, зачем тут мьютекс отпускать
-            for (const auto& subscriber_pair : subsTable) {
-                const std::string& key = subscriber_pair.first;
-                const auto& callback = subscriber_pair.second;
-                if (msg.getMessage() == key) {
+            // for (const auto& subscriber_pair : subsTable) {
+            //     const std::string& key = subscriber_pair.first;
+            //     const auto& callback = subscriber_pair.second;
+            //     if (msg.getMessage() == key) { // почему cache_err игнорится? Коллизия?
 
-                    callback(msg.getData()); // пока поддерживает один параметр todo: Сделать несколько
+            //         callback(msg.getData()); // пока поддерживает один параметр todo: Сделать несколько
+            //     }
+            // }
+
+            for (const subStruct sstr : subsVector) {
+                if (msg.getMessage() == sstr.name) {
+
+                    sstr.callback(msg.getData());
                 }
             }
 

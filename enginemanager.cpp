@@ -41,6 +41,8 @@ void EngineManager::initialize() {
     cf_instance.desfn = deserialize_wrapper;
     cf_instance.sefn = serialize_wrapper;
     acptr->getEventManager().sendMessage(AppMessage(name, "sub_to_cache", cf_instance));
+
+    acptr->getEventManager().sendMessage(AppMessage(name, "build_gui", 0));
 }
 
 void EngineManager::setActiveEngine(std::string ename) {
